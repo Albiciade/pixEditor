@@ -1,5 +1,4 @@
 void drawCanvas() { // Fonction pour dessiner la fenêtre et les images (basiquement tout)
-  pushMatrix(); // On 'sauvegarde' l'emplacement actuel avant des translate();
 
   float taille = height/20; // La taille d'une icône est de la hauteur de la fenêtre divisée par 20
   float l_droit = width-taille*2; // La coordonnée x de la colonne à droite de l'écran est de la largeur de la fenêtre moins la taille fois deux
@@ -23,42 +22,12 @@ void drawCanvas() { // Fonction pour dessiner la fenêtre et les images (basique
   line(0, height/18, l_droit, height/18); // Ligne délimitant les icônes du reste du plan de travail
   line(l_droit, height/18, l_droit, height); // Ligne à droite de l'écran, séparant d'autres icônes
 
-
-  translate(2, 2); // On se décale de 2 en abscisse et 2 en ordonnée
-  image(folder, 0, 0); // On affiche l'icône de fichier (ouverture d'image)
-
-  translate(taille+5, 0); // On se décale de la taille d'une icône + 5 pixels en abscisse
-  image(save, 0, 0); // On affiche l'icône de disquette (sauvegarde)
-
-  translate(taille+5, 0); // On se décale de la taille d'une icône + 5 pixels en abscisse
-  image(info, 0, 0); // On affiche l'icône d'informations
-
-  translate(taille+5, 0); // On se décale de la taille d'une icône + 5 pixels en abscisse
-  image(reset, 0, 0); // On affiche l'icône de reset (réinitialisation)
-
-  popMatrix(); // On revient à l'état précédant les translate(), au moment du pushMatrix() ligne 2
-
-
-  pushMatrix(); // On 'sauvegarde' l'emplacement actuel avant des translate();
-  translate(l_droit, height/18); // On se décale jusqu'en haut de la colonne à droite de l'écran
-  image(chart, 20, 2); // On dessinne l'icône des histogrammes
-
-  translate(0, height/18); // On se décale de la taille d'une icône latérale en ordonnée
-  image(contrast, 20, 2); // On dessinne l'icône du contraste
-
-  translate(0, height/18); // On se décale de la taille d'une icône latérale en ordonnée
-  image(symmetry, 20, 2); // On dessinne l'icône de la symétrie
-
-  translate(0, height/18); // On se décale de la taille d'une icône latérale en ordonnée
-  image(rgb, 20, 2); // On dessinne l'icône des composantes RGB
-
-  translate(0, height/18); // On se décale de la taille d'une icône latérale en ordonnée
-  image(noir_blanc, 20, 2); // On dessinne l'icône du mode noir et blanc
-
-  translate(0, height/18); // On se décale de la taille d'une icône latérale en ordonnée
-  image(gris, 20, 2); // On dessinne l'icône du mode gris
-
-  popMatrix(); // On revient à l'état précédant les translate(), au moment du pushMatrix() ligne 41
+  for (int i = 0; i < iconsh.length; i++) {
+    iconsh[i].display();
+  }
+  for (int i = 0; i < iconsv.length; i++) {
+    iconsv[i].display();
+  }
 
 
   pushMatrix(); // On 'sauvegarde' l'emplacement actuel avant des translate();
@@ -74,11 +43,11 @@ void drawCanvas() { // Fonction pour dessiner la fenêtre et les images (basique
     if (bw) { // Si la fenêtre du mode noir et blanc est ouverte
       updateNB(img_edit); // On met à jour les composantes noir / blanc, voir 'updateNB.pde'
     }
-    
-    if(rgb_gris){
-     updateGris(img_edit); 
+
+    if (rgb_gris) {
+      updateGris(img_edit);
     }
-    
+
     image(img_edit, 0, 0); // On affiche l'image éditée
   } else { // Sinon (si l'image à éditer n'existe pas)
     image(img, 0, 0); // On affiche l'image par défaut

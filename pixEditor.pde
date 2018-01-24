@@ -84,42 +84,17 @@ void draw() { // draw() : Code qui s'éxécute en boucle
 
 void mousePressed() { // mousePressed() : Déclenché si l'utilisateur clique avec sa souris
 
-  if (mouseX > 2 && mouseX < folder.width + 2 && mouseY < folder.height) { // Si l'utilisateur clique sur l'icône du fichier pour importer une image
-    println("Ouverture de fichier : " + millis() + " ms"); // Information système pour un éventuel débugging
-    selectInput("Sélectionnez votre image", "selectionImage"); // Ouverture de la fenêtre de séléction de fichier, méthode de retour étant selectionImage(fichier), voir 'selectionImage.pde'
+  for (int i = 0; i < iconsh.length; i++) {
+    if (mouseX > iconsh[i].x && mouseX < iconsh[i].x + iconsh[i].t && mouseY < iconsh[i].t) { // Si l'utilisateur clique sur l'icône du fichier pour importer une image
+      iconsh[i].executeAction();
+    }
   }
 
-
-  if (mouseX > folder.width + 5 && mouseX < folder.width + save.width + 7 && mouseY < save.height) { // Si l'utilisateur clique sur l'icône de sauvegarde pour sauvegarder une image
-    println("Enregistrement : " + millis() + " ms"); // Information système pour un éventuel débugging
-
-    selectOutput("Choisissez où enregistrer votre image", "saveImage");
+  for (int i = 0; i < iconsv.length; i++) {
+    if (mouseX > iconsv[i].x && mouseX < iconsv[i].x + iconsv[i].t && mouseY > iconsv[i].y && mouseY < iconsv[i].y + iconsv[i].t) {
+      iconsv[i].executeAction();
+    }
   }
-
-
-  if (mouseX > folder.width + save.width + 10 && mouseX < folder.width + save.width + info.width + 14 && mouseY < info.height) {
-    println("Infos : " + millis() + " ms"); // Information système pour un éventuel débugging
-    infos = !infos; // La variable infos est inversée (true -> false ou false -> true)
-  }
-
-
-  if (mouseX > folder.width + save.width + info.width + 15 && mouseX < folder.width + save.width + info.width + reset.width + 21 && mouseY < reset.height) { // Si l'utilisateur clique sur l'icône de réinitialisation pour réinitialiser l'image
-    println("Reset : " + millis() + " ms"); // Information système pour un éventuel débugging
-    resetImage(img_edit); // On réinitialise l'image à éditer, 'img_edit', voir 'resetImage.pde'
-  }
-
-
-  if (mouseX > width-height/20*2 + 20 && mouseX < width-height/20*2 + 20 + chart.width && mouseY > height/20 && mouseY < height/20 + chart.height + 7) { // Si l'utilisateur clique sur l'icône des histogrammes
-    println("Histogrammes : " + millis() + " ms"); // Information système pour un éventuel débugging
-    histogrammes = !histogrammes; // La variable histogrammes est inversée (true -> false ou false -> true)
-  }
-
-
-  if (mouseX > width-height/20*2 + 20 && mouseX < width-height/20*2 + 20 + contrast.width && mouseY > height/20 * 2 && mouseY < height/20 + chart.height + contrast.height + 7) { // Si l'utilisateur clique sur l'icône de contraste
-    println("Contraste : " + millis() + " ms"); // Information système pour un éventuel débugging
-    contraste = !contraste; // La variable contraste est inversée (true -> false ou false -> true)
-  }
-
 
   if (contraste) { // Si la variable contraste est vraie, ce qui revient à vérifier si la fenêtre de contraste est ouverte
     if (mouseX > 5*width/6 + width/11 && mouseX < 5*width/6 + width/11 + plus.width && mouseY > height/20 * 3 && mouseY < height/20 * 3 + plus.height) { // Si l'utilisateur appuie sur le bouton '+' de la fenêtre de contraste
@@ -128,19 +103,6 @@ void mousePressed() { // mousePressed() : Déclenché si l'utilisateur clique av
     if (mouseX > 5*width/6 + width/68 && mouseX < 5*width/6 + width/68 + minus.width && mouseY > height/20 * 3 && mouseY < height/20 * 3 + minus.height) { // Si l'utilisateur appuie sur le bouton '-' de la fenêtre de contraste
       coeff_contraste -= 0.1; // On diminue le coefficient de contraste ('coeff_contraste') de 0.1
     }
-  }
-
-
-  if (mouseX > width-height/20*2 + 20 && mouseX < width-height/20*2 + 20 + symmetry.width && mouseY > height/20 * 3 && mouseY < height/20 + chart.height + contrast.height + symmetry.height + 7) { // Si l'utilisateur clique sur l'icône de symétrie
-    println("Symétrie : " + millis() + " ms"); // Information système pour un éventuel débugging
-    reverseImage(img_edit); // On retourne l'image (voir 'reverseImage.pde')
-    symmetry_e = !symmetry_e; // La variable symmetry_e est inversée (true -> false ou false -> true)
-  }
-
-
-  if (mouseX > width-height/20*2 + 20 && mouseX < width-height/20*2 + 20 + symmetry.width && mouseY > height/20 * 4 + 14 && mouseY < height/20 + chart.height + contrast.height + symmetry.height + rgb.height + 14) { // Si l'utilisateur clique sur l'icône de composantes RGB
-    println("RGB : " + millis() + " ms"); // Information système pour un éventuel débugging
-    rgb_e = !rgb_e; // La variable rgb_e est inversée (true -> false ou false -> true)
   }
 
 
@@ -167,12 +129,6 @@ void mousePressed() { // mousePressed() : Déclenché si l'utilisateur clique av
     }
   }
 
-
-  if (mouseX > width-height/20*2 + 20 && mouseX < width-height/20*2 + 20 + symmetry.width && mouseY > height/20 * 5 + 21 && mouseY < height/20 + chart.height + contrast.height + symmetry.height + rgb.height + noir_blanc.height + 21) { // Si l'utilisateur clique sur l'icône de noir et blanc
-    println("Noir et Blanc : " + millis() + " ms"); // Information système pour un éventuel débugging
-    bw = !bw; // La variable bw est inversée (true -> false ou false -> true)
-  }
-
   if (bw) { // Si la fen^être de noir et blanc est ouverte
     if (mouseX > 5*width/6 + width/68 && mouseX < 5*width/6 + width/68 + minus.width && mouseY > height/20 * 6 && mouseY < height/20 * 6 + minus.height ) { // Si l'utilisateur appuie sur le bouton '-' de la fenêtre de noir et blanc
       coeff_bw -= 0.01; // On diminue le coefficient de noir et blanc de 0.01
@@ -180,11 +136,6 @@ void mousePressed() { // mousePressed() : Déclenché si l'utilisateur clique av
     if (mouseX > 5*width/6 + width/11 && mouseX < 5*width/6 + width/11 + minus.width && mouseY > height/20 * 6 && mouseY < height/20 * 6 + plus.height ) { // Si l'utilisateur appuie sur le bouton '+' de la fenêtre de noir et blanc
       coeff_bw += 0.01; // On augmente le coefficient de noir et blanc de 0.01
     }
-  }
-
-  if (mouseX > width-height/20*2 + 20 && mouseX < width-height/20*2 + 20 + symmetry.width && mouseY > height/20 * 6 + 14 && mouseY < height/20 + chart.height + contrast.height + symmetry.height + rgb.height + noir_blanc.height + gris.height + 14) { // Si l'utilisateur clique sur l'icône de composantes RGB
-    println("RGB gris : " + millis() + " ms"); // Information système pour un éventuel débugging
-    rgb_gris = !rgb_gris; // La variable rgb_gris est inversée (true -> false ou false -> true)
   }
 
 

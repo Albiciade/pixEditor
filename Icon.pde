@@ -67,9 +67,39 @@ class Icon {
 
     case "rgbGris":
       println("RGB gris : " + millis() + " ms");
+      img_edit = updateGris(img_edit);
       rgb_gris = !rgb_gris;
       break;
-
+      
+    case "useBrush":
+      println("Pinceau : " + millis() + " ms");
+      pinceau = !pinceau;
+      rubber = false;
+      picker = false;
+      break;
+      
+    case "useRubber":
+      println("Gomme : " + millis() + " ms");
+      rubber = !rubber;
+      pinceau = false;
+      picker = false;
+      break;
+    
+    case "usePicker":
+      println("Pipette : " + millis() + " ms");
+      picker = !picker;
+      pinceau = false;
+      rubber = false;
+      break;
+      
+    case "useBlur":
+      println("Flou : " + millis() + " ms");
+      flou = !flou;
+      pinceau = false;
+      rubber = false;
+      picker = false;
+      break;
+      
     default:
       println("Action inconnue : " + millis() + " ms");
       break;

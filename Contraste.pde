@@ -1,4 +1,4 @@
-void updateContrast(PImage tempImage) { // Fonction updateContrast avec argument une image à modifier
+PImage updateContrast(PImage tempImage) { // Fonction updateContrast avec argument une image à modifier
   for (int x = 0; x < img_edit_v.width; x++) {
     for (int y = 0; y < img_edit_v.height; y++) {
       int c = img_edit_v.get(x, y);
@@ -6,4 +6,5 @@ void updateContrast(PImage tempImage) { // Fonction updateContrast avec argument
     }
   }
   tempImage.updatePixels();
+  return tempImage;
 }

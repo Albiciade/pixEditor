@@ -5,7 +5,6 @@ int[] lumi = new int[256];
 
 int r, g, b, l;
 
-
 void creerHistogrammes(PImage image) {
   for (int i = 0; i < rouge.length; i++) {
     rouge[i] = 0;

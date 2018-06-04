@@ -1,4 +1,4 @@
-void updateRGB(PImage imgt) {
+PImage updateRGB(PImage imgt) {
   for (int x = 0; x < imgt.width; x++) {
     for (int y = 0; y < imgt.height; y++) {
       int c = img_edit_v.get(x, y);
@@ -6,4 +6,5 @@ void updateRGB(PImage imgt) {
     }
   }
   imgt.updatePixels();
+  return imgt;
 }

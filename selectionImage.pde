@@ -6,7 +6,8 @@ void selectionImage(File image) {
   rgb_e = false;
   bw = false;
   rgb_gris = false;
-
+  pinceau = false;
+  
   coeff_contraste = 1;
   coeff_r = 1;
   coeff_g = 1;
@@ -53,10 +54,9 @@ void selectionImage(File image) {
       for (int x = 0; x < img_edit_vs.width; x++) {
         for (int y = 0; y < img_edit_vs.height; y++) {
           img_edit_vs.pixels[y * img_edit_vs.width + x] = img_edit_v.pixels[(img_edit_v.width - x - 1) + y * img_edit_v.width];
-          img_edit_vs.updatePixels();
         }
       }
-
+      img_edit_vs.updatePixels();
       surface.setTitle(img_name + " - " + img.width + "x" + img.height + "px");
     }
   }

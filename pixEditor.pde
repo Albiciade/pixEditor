@@ -161,7 +161,7 @@ void draw() { // draw() : Code qui s'éxécute en boucle
       // ------------------------[ OUTIL PINCEAU DANS PLAN DE TRAVAIL ]------------------------
 
       if (mouseY > height/18 && mouseX < l_droit) {
-        c = color(cr, cg, cb, int(random(255)));
+        c = color(cr, cg, cb);
         fill(c);
         noStroke();
         int x = int(mouseX - taille);

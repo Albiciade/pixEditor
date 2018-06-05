@@ -124,6 +124,7 @@ void setup() { // setup() : Code qui ne s'exécute qu'une seule fois
 
 void draw() { // draw() : Code qui s'éxécute en boucle
   if (oui == 1) {
+    loadIcons();
     drawCanvas();
     // --------------------------------------- [ TOUCHE SOURIS CONTINUE ] ---------------------------------------
     if (mousePressed) {
